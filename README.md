@@ -2,6 +2,8 @@
 
 An iOS 6-inspired calculator experiment using `typesafe-ai/jev` through Vercel AI Gateway. Bun serves the static UI and streams evaluation steps from the server. The API key stays on the server.
 
+Live: **https://jev-calculator.vercel.app**. The free Vercel Hobby project only forwards requests to Oracle using `public-address/vercel.json`; no API keys or application code are deployed there. Redeploy the address configuration with `vercel --cwd public-address --prod --scope sstehniys-projects`.
+
 ## Run
 
 ```sh
@@ -58,6 +60,8 @@ Server paths:
 - `/etc/jev-calculator.env`: root-only API key, `HOST=0.0.0.0`, `BUDGET_DB=/data/budget.sqlite`, and `PUBLIC_ORIGIN`
 - `/var/lib/jev-calculator/budget.sqlite`: lifetime ledger, owned by UID 10000
 - `/etc/systemd/system/jev-calculator.service`: restarts the container after failures and reboots
+
+`PUBLIC_ORIGIN` contains the exact allowed browser origins, separated by commas: `https://jev-calculator.vercel.app,https://oracle.tail92806c.ts.net`.
 
 First deployment: create the root-only environment file, install the service from this repo, build the image, and initialize the ledger exactly once with the same image:
 

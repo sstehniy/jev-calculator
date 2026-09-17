@@ -12,7 +12,7 @@ test('HTTP boundary protects files, rejects cross-site requests, and blocks exha
   db.query('UPDATE budget SET used = 1000000000').run();
   db.close();
   const server = Bun.spawn([process.execPath, 'server.js'], {
-    env: { ...process.env, AI_GATEWAY_API_KEY: 'test-no-real-key', BUDGET_DB: path, PORT: '0', HOST: '127.0.0.1', PUBLIC_ORIGIN: '' },
+    env: { ...process.env, AI_GATEWAY_API_KEY: 'test-no-real-key', BUDGET_DB: path, PORT: '0', HOST: '127.0.0.1', PUBLIC_ORIGIN: 'https://jev-calculator.vercel.app,https://oracle.tail92806c.ts.net' },
     stdout: 'pipe', stderr: 'pipe',
   });
   try {
@@ -31,7 +31,7 @@ test('HTTP boundary protects files, rejects cross-site requests, and blocks exha
     expect((await post({ headers, body: '{' })).status).toBe(400);
     expect((await post({ headers, body: JSON.stringify({ expression: 'fetch(secret)', precision: 0 }) })).status).toBe(400);
     expect((await post({ headers, body: 'a'.repeat(1025) })).status).toBe(413);
-    const response = await post({ headers, body: JSON.stringify({ expression: '2*2', precision: 0 }) });
+    const response = await post({ headers: { ...headers, origin: 'https://jev-calculator.vercel.app' }, body: JSON.stringify({ expression: '2*2', precision: 0 }) });
     const event = JSON.parse((await response.text()).trim());
     expect(event.type).toBe('error');
     expect(event.message).toContain('$1 lifetime budget');

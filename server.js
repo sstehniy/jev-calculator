@@ -46,7 +46,7 @@ const server = Bun.serve({
     if (req.headers.get('origin')) {
       let origin;
       try { origin = new URL(req.headers.get('origin')); } catch { return errorResponse('Invalid origin', 403); }
-      if (origin.origin !== (process.env.PUBLIC_ORIGIN || url.origin)) return errorResponse('Invalid origin', 403);
+      if (!(process.env.PUBLIC_ORIGIN || url.origin).split(',').includes(origin.origin)) return errorResponse('Invalid origin', 403);
     }
     let body;
     try {
