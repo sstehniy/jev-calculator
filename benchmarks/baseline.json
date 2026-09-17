@@ -1,0 +1,572 @@
+[
+  {
+    "expression": "2 * 2",
+    "precision": 0,
+    "expected": 4,
+    "correct": true,
+    "type": "done",
+    "value": 4,
+    "probability": 1,
+    "weakest": 0.99,
+    "steps": 3,
+    "tokens": 1535,
+    "cost": 0.00006447,
+    "estimated": false,
+    "seconds": 1.1480455840000001,
+    "calls": [
+      {
+        "ms": 430.664708,
+        "questions": 1
+      },
+      {
+        "ms": 299.60970799999996,
+        "questions": 1
+      },
+      {
+        "ms": 414.31779199999994,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "2 * 2",
+    "precision": 2,
+    "expected": 4,
+    "correct": false,
+    "type": "done",
+    "value": 2,
+    "probability": 0.58,
+    "weakest": 0.57,
+    "steps": 10,
+    "tokens": 4532,
+    "cost": 0.00019034399999999998,
+    "estimated": false,
+    "seconds": 3.6006298339999994,
+    "calls": [
+      {
+        "ms": 307.9778749999998,
+        "questions": 1
+      },
+      {
+        "ms": 323.31345899999997,
+        "questions": 1
+      },
+      {
+        "ms": 333.6615840000002,
+        "questions": 1
+      },
+      {
+        "ms": 285.00316599999996,
+        "questions": 1
+      },
+      {
+        "ms": 426.26758299999983,
+        "questions": 1
+      },
+      {
+        "ms": 413.80395799999997,
+        "questions": 1
+      },
+      {
+        "ms": 450.32395799999995,
+        "questions": 1
+      },
+      {
+        "ms": 391.80766600000015,
+        "questions": 1
+      },
+      {
+        "ms": 315.34550000000036,
+        "questions": 1
+      },
+      {
+        "ms": 345.81024999999954,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "12 + 8",
+    "precision": 0,
+    "expected": 20,
+    "correct": true,
+    "type": "done",
+    "value": 20,
+    "probability": 1,
+    "weakest": 0.87,
+    "steps": 7,
+    "tokens": 3111,
+    "cost": 0.000130662,
+    "estimated": false,
+    "seconds": 2.402777083,
+    "calls": [
+      {
+        "ms": 312.7444999999998,
+        "questions": 1
+      },
+      {
+        "ms": 386.63754100000006,
+        "questions": 1
+      },
+      {
+        "ms": 345.6416249999993,
+        "questions": 1
+      },
+      {
+        "ms": 309.58679200000006,
+        "questions": 1
+      },
+      {
+        "ms": 390.57866699999977,
+        "questions": 1
+      },
+      {
+        "ms": 293.8382499999998,
+        "questions": 1
+      },
+      {
+        "ms": 356.7624999999998,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "7 - 12",
+    "precision": 0,
+    "expected": -5,
+    "correct": true,
+    "type": "done",
+    "value": -5,
+    "probability": 1,
+    "weakest": 1,
+    "steps": 3,
+    "tokens": 1539,
+    "cost": 0.000064638,
+    "estimated": false,
+    "seconds": 1.0326981249999998,
+    "calls": [
+      {
+        "ms": 392.22212500000023,
+        "questions": 1
+      },
+      {
+        "ms": 286.6967910000003,
+        "questions": 1
+      },
+      {
+        "ms": 350.7722909999993,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "1 / 4",
+    "precision": 2,
+    "expected": 0.25,
+    "correct": true,
+    "type": "done",
+    "value": 0.25,
+    "probability": 1,
+    "weakest": 0.99,
+    "steps": 7,
+    "tokens": 3300,
+    "cost": 0.0001386,
+    "estimated": false,
+    "seconds": 2.1372478330000013,
+    "calls": [
+      {
+        "ms": 291.50033299999996,
+        "questions": 1
+      },
+      {
+        "ms": 336.7892499999998,
+        "questions": 1
+      },
+      {
+        "ms": 319.50333300000057,
+        "questions": 1
+      },
+      {
+        "ms": 275.79279099999985,
+        "questions": 1
+      },
+      {
+        "ms": 282.7345839999998,
+        "questions": 1
+      },
+      {
+        "ms": 299.7307090000013,
+        "questions": 1
+      },
+      {
+        "ms": 323.7101249999996,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "1 / 3",
+    "precision": 4,
+    "expected": 0.3333,
+    "correct": false,
+    "type": "error",
+    "message": "Jev disagreed with an earlier range. Run again to retry.",
+    "steps": 12,
+    "tokens": 5581,
+    "cost": 0.000234402,
+    "estimated": false,
+    "seconds": 4.03995975,
+    "calls": [
+      {
+        "ms": 367.56524999999965,
+        "questions": 1
+      },
+      {
+        "ms": 273.8927910000002,
+        "questions": 1
+      },
+      {
+        "ms": 297.287957999999,
+        "questions": 1
+      },
+      {
+        "ms": 271.9327919999996,
+        "questions": 1
+      },
+      {
+        "ms": 286.0627919999988,
+        "questions": 1
+      },
+      {
+        "ms": 315.90308299999924,
+        "questions": 1
+      },
+      {
+        "ms": 352.6920829999999,
+        "questions": 1
+      },
+      {
+        "ms": 352.47904200000085,
+        "questions": 1
+      },
+      {
+        "ms": 465.3352080000004,
+        "questions": 1
+      },
+      {
+        "ms": 267.91462500000125,
+        "questions": 1
+      },
+      {
+        "ms": 286.07183299999997,
+        "questions": 1
+      },
+      {
+        "ms": 492.41620800000055,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "(12 + 8) * 3",
+    "precision": 0,
+    "expected": 60,
+    "correct": true,
+    "type": "done",
+    "value": 60,
+    "probability": 0.99,
+    "weakest": 0.9,
+    "steps": 7,
+    "tokens": 3159,
+    "cost": 0.000132678,
+    "estimated": false,
+    "seconds": 2.1828232919999975,
+    "calls": [
+      {
+        "ms": 309.08858300000065,
+        "questions": 1
+      },
+      {
+        "ms": 315.7010829999999,
+        "questions": 1
+      },
+      {
+        "ms": 267.65616599999885,
+        "questions": 1
+      },
+      {
+        "ms": 336.497292,
+        "questions": 1
+      },
+      {
+        "ms": 339.66133399999853,
+        "questions": 1
+      },
+      {
+        "ms": 325.26795800000036,
+        "questions": 1
+      },
+      {
+        "ms": 281.788083999998,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "123 * 45",
+    "precision": 0,
+    "expected": 5535,
+    "correct": false,
+    "type": "error",
+    "message": "Jev rejected the final candidates. Run again to retry.",
+    "steps": 13,
+    "tokens": 5709,
+    "cost": 0.00023977799999999995,
+    "estimated": false,
+    "seconds": 4.910859165999998,
+    "calls": [
+      {
+        "ms": 311.64800000000105,
+        "questions": 1
+      },
+      {
+        "ms": 393.5960840000007,
+        "questions": 1
+      },
+      {
+        "ms": 334.80625000000146,
+        "questions": 1
+      },
+      {
+        "ms": 441.8448750000025,
+        "questions": 1
+      },
+      {
+        "ms": 544.7666659999995,
+        "questions": 1
+      },
+      {
+        "ms": 502.4898330000033,
+        "questions": 1
+      },
+      {
+        "ms": 319.7807499999981,
+        "questions": 1
+      },
+      {
+        "ms": 325.3629170000022,
+        "questions": 1
+      },
+      {
+        "ms": 400.64416699999856,
+        "questions": 1
+      },
+      {
+        "ms": 415.1314999999995,
+        "questions": 1
+      },
+      {
+        "ms": 264.04149999999936,
+        "questions": 1
+      },
+      {
+        "ms": 368.50216699999874,
+        "questions": 1
+      },
+      {
+        "ms": 274.95779200000106,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "999 + 1",
+    "precision": 0,
+    "expected": 1000,
+    "correct": true,
+    "type": "done",
+    "value": 1000,
+    "probability": 0.99,
+    "weakest": 0.99,
+    "steps": 13,
+    "tokens": 5685,
+    "cost": 0.00023877000000000002,
+    "estimated": false,
+    "seconds": 4.788629666,
+    "calls": [
+      {
+        "ms": 279.7589999999982,
+        "questions": 1
+      },
+      {
+        "ms": 287.9069579999996,
+        "questions": 1
+      },
+      {
+        "ms": 325.45179199999984,
+        "questions": 1
+      },
+      {
+        "ms": 398.8186659999992,
+        "questions": 1
+      },
+      {
+        "ms": 523.1814999999988,
+        "questions": 1
+      },
+      {
+        "ms": 327.20929199999955,
+        "questions": 1
+      },
+      {
+        "ms": 363.9387910000005,
+        "questions": 1
+      },
+      {
+        "ms": 354.73062500000015,
+        "questions": 1
+      },
+      {
+        "ms": 380.8810830000002,
+        "questions": 1
+      },
+      {
+        "ms": 359.87454199999775,
+        "questions": 1
+      },
+      {
+        "ms": 466.6126660000009,
+        "questions": 1
+      },
+      {
+        "ms": 381.5409580000014,
+        "questions": 1
+      },
+      {
+        "ms": 328.25383299999885,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "0.1 + 0.2",
+    "precision": 2,
+    "expected": 0.3,
+    "correct": true,
+    "type": "done",
+    "value": 0.3,
+    "probability": 0.76,
+    "weakest": 0.76,
+    "steps": 6,
+    "tokens": 2979,
+    "cost": 0.00012511800000000002,
+    "estimated": false,
+    "seconds": 1.8002521669999987,
+    "calls": [
+      {
+        "ms": 306.58858399999735,
+        "questions": 1
+      },
+      {
+        "ms": 278.31116699999984,
+        "questions": 1
+      },
+      {
+        "ms": 268.7670829999988,
+        "questions": 1
+      },
+      {
+        "ms": 373.79599999999846,
+        "questions": 1
+      },
+      {
+        "ms": 269.38204199999745,
+        "questions": 1
+      },
+      {
+        "ms": 297.87466700000004,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "15 * 17",
+    "precision": 0,
+    "expected": 255,
+    "correct": false,
+    "type": "error",
+    "message": "Jev disagreed with an earlier range. Run again to retry.",
+    "steps": 2,
+    "tokens": 1124,
+    "cost": 0.000047208,
+    "estimated": false,
+    "seconds": 0.5758522079999966,
+    "calls": [
+      {
+        "ms": 279.41791699999885,
+        "questions": 1
+      },
+      {
+        "ms": 292.3623750000006,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "2 ^ 8",
+    "precision": 0,
+    "expected": 256,
+    "correct": true,
+    "type": "done",
+    "value": 256,
+    "probability": 1,
+    "weakest": 0.69,
+    "steps": 10,
+    "tokens": 4354,
+    "cost": 0.00018286799999999998,
+    "estimated": false,
+    "seconds": 3.2258948750000016,
+    "calls": [
+      {
+        "ms": 300.8860420000019,
+        "questions": 1
+      },
+      {
+        "ms": 362.5335840000007,
+        "questions": 1
+      },
+      {
+        "ms": 331.4445830000004,
+        "questions": 1
+      },
+      {
+        "ms": 348.3394159999989,
+        "questions": 1
+      },
+      {
+        "ms": 301.8320840000015,
+        "questions": 1
+      },
+      {
+        "ms": 356.1984169999996,
+        "questions": 1
+      },
+      {
+        "ms": 344.86383399999977,
+        "questions": 1
+      },
+      {
+        "ms": 297.2894589999996,
+        "questions": 1
+      },
+      {
+        "ms": 257.2460829999982,
+        "questions": 1
+      },
+      {
+        "ms": 313.5787500000006,
+        "questions": 1
+      }
+    ]
+  }
+]

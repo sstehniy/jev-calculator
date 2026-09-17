@@ -1,0 +1,14 @@
+{
+  "name": "jev-calculator",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "bun server.js",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@ai-sdk/gateway": "4.0.85",
+    "ai": "7.0.105",
+    "mathjs": "^15.2.0"
+  }
+}

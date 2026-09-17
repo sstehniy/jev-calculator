@@ -1,0 +1,11 @@
+*
+!package.json
+!bun.lock
+!server.js
+!solver.js
+!numbers.js
+!result-check.js
+!budget.js
+!app.js
+!index.html
+!style.css

@@ -1,0 +1,324 @@
+[
+  {
+    "expression": "2 * 2",
+    "precision": 0,
+    "expected": 4,
+    "correct": true,
+    "type": "done",
+    "value": 4,
+    "probability": 1,
+    "uncertain": false,
+    "steps": 2,
+    "questions": 9,
+    "tokens": 1917,
+    "cost": 0.000080514,
+    "estimated": false,
+    "seconds": 1.0392442499999999,
+    "calls": [
+      {
+        "ms": 467.254333,
+        "questions": 8
+      },
+      {
+        "ms": 570.9713750000001,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "2 * 2",
+    "precision": 2,
+    "expected": 4,
+    "correct": true,
+    "type": "done",
+    "value": 4,
+    "probability": 0.9,
+    "verification": 0.91,
+    "uncertain": false,
+    "steps": 3,
+    "questions": 20,
+    "tokens": 3257,
+    "cost": 0.000136794,
+    "estimated": false,
+    "seconds": 1.6428677500000002,
+    "calls": [
+      {
+        "ms": 559.580667,
+        "questions": 10
+      },
+      {
+        "ms": 795.7540830000003,
+        "questions": 1
+      },
+      {
+        "ms": 285.91779199999974,
+        "questions": 9
+      }
+    ]
+  },
+  {
+    "expression": "12 + 8",
+    "precision": 0,
+    "expected": 20,
+    "correct": true,
+    "type": "done",
+    "value": 20,
+    "probability": 1,
+    "uncertain": false,
+    "steps": 2,
+    "questions": 9,
+    "tokens": 1949,
+    "cost": 0.000081858,
+    "estimated": false,
+    "seconds": 0.7347691249999998,
+    "calls": [
+      {
+        "ms": 441.69458299999997,
+        "questions": 8
+      },
+      {
+        "ms": 292.16804100000036,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "7 - 12",
+    "precision": 0,
+    "expected": -5,
+    "correct": true,
+    "type": "done",
+    "value": -5,
+    "probability": 1,
+    "uncertain": false,
+    "steps": 2,
+    "questions": 9,
+    "tokens": 1907,
+    "cost": 0.00008009400000000001,
+    "estimated": false,
+    "seconds": 0.7194485000000004,
+    "calls": [
+      {
+        "ms": 301.3947909999997,
+        "questions": 8
+      },
+      {
+        "ms": 416.9695420000003,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "1 / 4",
+    "precision": 2,
+    "expected": 0.25,
+    "correct": true,
+    "type": "done",
+    "value": 0.25,
+    "probability": 1,
+    "uncertain": false,
+    "steps": 2,
+    "questions": 11,
+    "tokens": 2867,
+    "cost": 0.000120414,
+    "estimated": false,
+    "seconds": 0.800577875,
+    "calls": [
+      {
+        "ms": 517.5100830000001,
+        "questions": 10
+      },
+      {
+        "ms": 281.69529200000034,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "1 / 3",
+    "precision": 4,
+    "expected": 0.3333,
+    "correct": true,
+    "type": "done",
+    "value": 0.3333,
+    "probability": 0.95,
+    "uncertain": false,
+    "steps": 2,
+    "questions": 13,
+    "tokens": 3265,
+    "cost": 0.00013713,
+    "estimated": false,
+    "seconds": 0.7666545420000003,
+    "calls": [
+      {
+        "ms": 332.9690839999994,
+        "questions": 12
+      },
+      {
+        "ms": 431.87487500000043,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "(12 + 8) * 3",
+    "precision": 0,
+    "expected": 60,
+    "correct": true,
+    "type": "done",
+    "value": 60,
+    "probability": 1,
+    "uncertain": false,
+    "steps": 2,
+    "questions": 9,
+    "tokens": 2251,
+    "cost": 0.00009454199999999999,
+    "estimated": false,
+    "seconds": 0.6996500839999998,
+    "calls": [
+      {
+        "ms": 376.88324999999986,
+        "questions": 8
+      },
+      {
+        "ms": 321.8305419999997,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "123 * 45",
+    "precision": 0,
+    "expected": 5535,
+    "correct": true,
+    "type": "done",
+    "value": 5535,
+    "probability": 0.95,
+    "verification": 0.99,
+    "uncertain": false,
+    "steps": 3,
+    "questions": 18,
+    "tokens": 3209,
+    "cost": 0.000134778,
+    "estimated": false,
+    "seconds": 1.0847375830000001,
+    "calls": [
+      {
+        "ms": 367.1045830000003,
+        "questions": 8
+      },
+      {
+        "ms": 257.0036250000003,
+        "questions": 1
+      },
+      {
+        "ms": 457.9730410000002,
+        "questions": 9
+      }
+    ]
+  },
+  {
+    "expression": "999 + 1",
+    "precision": 0,
+    "expected": 1000,
+    "correct": true,
+    "type": "done",
+    "value": 1000,
+    "probability": 0.99,
+    "uncertain": false,
+    "steps": 2,
+    "questions": 9,
+    "tokens": 2685,
+    "cost": 0.00011276999999999999,
+    "estimated": false,
+    "seconds": 0.9403565420000004,
+    "calls": [
+      {
+        "ms": 380.8078750000004,
+        "questions": 8
+      },
+      {
+        "ms": 557.6687079999992,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "0.1 + 0.2",
+    "precision": 2,
+    "expected": 0.3,
+    "correct": true,
+    "type": "done",
+    "value": 0.3,
+    "probability": 0.91,
+    "uncertain": false,
+    "steps": 2,
+    "questions": 11,
+    "tokens": 2607,
+    "cost": 0.00010949399999999999,
+    "estimated": false,
+    "seconds": 0.8249560000000001,
+    "calls": [
+      {
+        "ms": 421.9827919999989,
+        "questions": 10
+      },
+      {
+        "ms": 402.35354200000074,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "15 * 17",
+    "precision": 0,
+    "expected": 255,
+    "correct": true,
+    "type": "done",
+    "value": 255,
+    "probability": 0.99,
+    "uncertain": false,
+    "steps": 2,
+    "questions": 9,
+    "tokens": 2637,
+    "cost": 0.000110754,
+    "estimated": false,
+    "seconds": 0.6433658329999998,
+    "calls": [
+      {
+        "ms": 275.005083,
+        "questions": 8
+      },
+      {
+        "ms": 367.3345410000002,
+        "questions": 1
+      }
+    ]
+  },
+  {
+    "expression": "2 ^ 8",
+    "precision": 0,
+    "expected": 256,
+    "correct": true,
+    "type": "done",
+    "value": 256,
+    "probability": 1,
+    "uncertain": false,
+    "steps": 2,
+    "questions": 9,
+    "tokens": 2669,
+    "cost": 0.000112098,
+    "estimated": false,
+    "seconds": 0.7036181670000006,
+    "calls": [
+      {
+        "ms": 346.1690830000007,
+        "questions": 8
+      },
+      {
+        "ms": 353.479209000001,
+        "questions": 1
+      }
+    ]
+  }
+]

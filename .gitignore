@@ -1,0 +1,9 @@
+.env
+.env.*
+!.env.example
+.secrets/
+data/
+*.sqlite*
+node_modules/
+*.log
+.DS_Store

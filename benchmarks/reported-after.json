@@ -1,0 +1,38 @@
+[
+  {
+    "type": "done",
+    "value": 24600,
+    "probability": 1,
+    "uncertain": false,
+    "steps": 2,
+    "questions": 9,
+    "tokens": 2735,
+    "cost": 0.00011486999999999999,
+    "estimated": false,
+    "seconds": 0.8712234999999999
+  },
+  {
+    "type": "done",
+    "value": 24600,
+    "probability": 1,
+    "uncertain": false,
+    "steps": 2,
+    "questions": 9,
+    "tokens": 2735,
+    "cost": 0.00011486999999999999,
+    "estimated": false,
+    "seconds": 0.658706917
+  },
+  {
+    "type": "done",
+    "value": 24600,
+    "probability": 0.99,
+    "uncertain": false,
+    "steps": 2,
+    "questions": 9,
+    "tokens": 2735,
+    "cost": 0.00011486999999999999,
+    "estimated": false,
+    "seconds": 0.7215793750000002
+  }
+]
