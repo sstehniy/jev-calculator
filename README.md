@@ -2,7 +2,9 @@
 
 An iOS 6-inspired calculator experiment using `typesafe-ai/jev` through Vercel AI Gateway. Bun serves the static UI and streams evaluation steps from the server. The API key stays on the server.
 
-Live: **https://jev-calculator.vercel.app**. The free Vercel Hobby project only forwards requests to Oracle using `public-address/vercel.json`; no API keys or application code are deployed there. Redeploy the address configuration with `vercel --cwd public-address --prod --scope sstehniys-projects`.
+Live: **https://jev-calculator.vercel.app**. The free Vercel Hobby project only forwards requests to Oracle through a project-level routing rule; no API keys or application code are deployed there. Inspect it with `vercel routes list --project jev-calculator --scope sstehniys-projects`.
+
+The published rule is named `Oracle calculator`, matches `^/(.*)$`, and rewrites to `https://oracle.tail92806c.ts.net/$1`. Routing changes use `vercel routes publish --yes --project jev-calculator --scope sstehniys-projects`; ordinary app updates only require redeploying Oracle.
 
 ## Run
 
