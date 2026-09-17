@@ -1,0 +1,4 @@
+jev.132-145-253-62.sslip.io {
+	encode zstd gzip
+	reverse_proxy jev-calculator:3217
+}

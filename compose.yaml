@@ -1,0 +1,41 @@
+# Production stack. GitHub Actions publishes the image; Oracle only pulls it.
+services:
+  app:
+    image: ghcr.io/sstehniy/jev-calculator:main
+    restart: unless-stopped
+    user: "10000:10000"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 512m
+    memswap_limit: 512m
+    cpus: 1
+    pids_limit: 128
+    environment:
+      AI_GATEWAY_API_KEY: ${AI_GATEWAY_API_KEY:?set AI_GATEWAY_API_KEY in .env}
+      HOST: 0.0.0.0
+      BUDGET_DB: /data/budget.sqlite
+      PUBLIC_ORIGIN: https://${API_DOMAIN:?set API_DOMAIN in .env},https://jev-calculator.vercel.app
+    volumes:
+      - /var/lib/jev-calculator:/data
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+    networks:
+      default:
+        aliases: [jev-calculator]
+    stop_grace_period: 15s
+    healthcheck:
+      test: [CMD, bun, -e, "await fetch('http://127.0.0.1:3217').then(r => { if (!r.ok) process.exit(1) })"]
+      interval: 15s
+      timeout: 3s
+      retries: 4
+    logging:
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: "2"
+
+networks:
+  default:
+    external: true
+    name: receit_default

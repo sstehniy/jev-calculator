@@ -2,9 +2,9 @@
 
 An iOS 6-inspired calculator experiment using `typesafe-ai/jev` through Vercel AI Gateway. Bun serves the static UI and streams evaluation steps from the server. The API key stays on the server.
 
-Live: **https://jev-calculator.vercel.app**. The free Vercel Hobby project only forwards requests to Oracle through a project-level routing rule; no API keys or application code are deployed there. Inspect it with `vercel routes list --project jev-calculator --scope sstehniys-projects`.
+Live: **https://jev.132-145-253-62.sslip.io**. The free hostname resolves directly to Oracle, where Caddy provides HTTPS and proxies to the private Docker network. **https://jev-calculator.vercel.app** remains a short alias and forwards to the same Oracle endpoint; no API key or application code runs on Vercel.
 
-The published rule is named `Oracle calculator`, matches `^/(.*)$`, and rewrites to `https://oracle.tail92806c.ts.net/$1`. Routing changes use `vercel routes publish --yes --project jev-calculator --scope sstehniys-projects`; ordinary app updates only require redeploying Oracle.
+The Vercel rule is named `Oracle calculator`, matches `^/(.*)$`, and rewrites to the `sslip.io` address. Inspect it with `vercel routes list --project jev-calculator --scope sstehniys-projects`.
 
 ## Run
 
@@ -54,28 +54,26 @@ Keep the ledger for the lifetime of the key. Never delete, reset, or restore an 
 
 ## Oracle deployment
 
-The public URL is served by Tailscale Funnel with managed HTTPS. The container port is bound to localhost only; SSH remains reachable through the private tailnet. The app runs as a non-root user in a read-only container with dropped capabilities, no privilege escalation, bounded CPU/memory/processes, and rotating logs. Only the budget directory is writable. No Docker socket is mounted. Requests have a 1 KB body limit, two concurrent calculations, 30 starts per minute, and a three-minute gateway timeout. Reference arithmetic runs in a separate process with a 1.5-second timeout. Responses use restrictive security headers and reject cross-site browser submissions.
+The deployment follows the same pattern as `receit`: GitHub Actions publishes a private ARM64 image to GHCR, Oracle pulls it through the shared restricted deploy runner, Docker Compose keeps it running, and the existing Caddy container provides public HTTPS. The app has no published container port and is reachable only from Caddy on the shared Docker network. SSH remains reachable through the private tailnet.
+
+The app runs as a non-root user in a read-only container with dropped capabilities, no privilege escalation, bounded CPU/memory/processes, a health check, and rotating logs. Only the budget directory is writable. No Docker socket is mounted. Requests have a 1 KB body limit, two concurrent calculations, 30 starts per minute, and a three-minute gateway timeout. Reference arithmetic runs in a separate process with a 1.5-second timeout. Responses use restrictive security headers and reject cross-site browser submissions.
 
 Server paths:
 
-- `/opt/jev-calculator`: deployment source and Dockerfile
-- `/etc/jev-calculator.env`: root-only API key, `HOST=0.0.0.0`, `BUDGET_DB=/data/budget.sqlite`, and `PUBLIC_ORIGIN`
+- `/srv/jev-calculator/compose.yaml`: root-owned production manifest refreshed from this repository
+- `/srv/jev-calculator/Caddyfile`: root-owned Caddy site imported by the shared `receit` proxy
+- `/srv/jev-calculator/.env`: root-only API key, domain, and GHCR pull credentials
+- `/srv/jev-calculator/deploy.sh`: restricted entry point for the shared deploy runner
 - `/var/lib/jev-calculator/budget.sqlite`: lifetime ledger, owned by UID 10000
-- `/etc/systemd/system/jev-calculator.service`: restarts the container after failures and reboots
 
-`PUBLIC_ORIGIN` contains the exact allowed browser origins, separated by commas: `https://jev-calculator.vercel.app,https://oracle.tail92806c.ts.net`.
+Compose derives `PUBLIC_ORIGIN` from `API_DOMAIN` and also allows the Vercel alias.
 
-First deployment: create the root-only environment file, install the service from this repo, build the image, and initialize the ledger exactly once with the same image:
+The server environment contains `API_DOMAIN`, `AI_GATEWAY_API_KEY`, `GHCR_USER`, `GHCR_TOKEN`, and `APP_HEALTH_URL`. Initialize the ledger exactly once, then use the restricted deploy entry point:
 
 ```sh
-sudo install -d -o 10000 -g 10000 -m 700 /var/lib/jev-calculator
-docker build -t jev-calculator:latest /opt/jev-calculator
-docker run --rm --user 10000:10000 -v /var/lib/jev-calculator:/data jev-calculator:latest bun budget.js init /data/budget.sqlite
-sudo systemctl daemon-reload
-sudo systemctl enable --now jev-calculator
-sudo tailscale funnel --bg --https=443 http://127.0.0.1:3217
+sudo /srv/jev-calculator/deploy.sh
 ```
 
-To update, transfer a reviewed Git archive to `/opt/jev-calculator`, rebuild the image, and `sudo systemctl restart jev-calculator`. Preserve the environment file and budget directory. Check `sudo systemctl status jev-calculator` and `sudo tailscale funnel status`. To unpublish, use `sudo tailscale funnel --https=443 off`. No Cloudflare tunnel or local laptop process is needed.
+The publish workflow builds every push to `main`. After it succeeds, `/srv/jev-calculator/deploy.sh` pulls the image and recreates the stack. Preserve `.env` and `/var/lib/jev-calculator`; the budget ledger is never part of an image or repository.
 
 Sources: https://vercel.com/docs/ai-gateway/modalities/evaluation and https://vercel.com/ai-gateway/models/jev
