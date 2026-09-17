@@ -3,6 +3,7 @@ WORKDIR /app
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile --production
 COPY server.js solver.js numbers.js result-check.js budget.js app.js index.html style.css ./
+RUN bun build result-check.js --target=bun --minify --outfile=/tmp/result-check.js && mv /tmp/result-check.js ./result-check.js
 USER 10000:10000
 ENV HOST=0.0.0.0 BUDGET_DB=/data/budget.sqlite
 EXPOSE 3217

@@ -30,6 +30,8 @@ The measured bottleneck was sequential model requests, not local calculation or 
 
 The reported `200*123` failure originally stopped after 7 calls / 2.48 seconds. The new solver returned 24600 in repeated two-call runs. Raw results are in `benchmarks/baseline.json`, `benchmarks/after.json`, and `benchmarks/reported-after.json`.
 
+The production image bundles the isolated reference checker. On Oracle, three identical checks had a median 1.286 seconds unbundled versus 0.198 seconds bundled, including Docker exec overhead. This keeps the process timeout without paying for hundreds of module imports on each run.
+
 Relevant official guidance: [batch independent questions](https://docs.typesafe.ai/patterns/fan-out), [retain alternative paths](https://docs.typesafe.ai/cookbooks/hierarchical_classification), and [known arithmetic limitations](https://docs.typesafe.ai/model-jaggedness/jev-1.13).
 
 ## Lifetime budget
