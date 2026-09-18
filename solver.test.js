@@ -4,6 +4,7 @@ import { compactNumber } from './numbers.js';
 
 function modelFor(value, precision, { wrongMagnitude = false, rejectOnce = false, uncertain = false } = {}) {
   let calls = 0;
+
   return async ({ questions }) => {
     calls++;
     const answers = {};
@@ -11,9 +12,12 @@ function modelFor(value, precision, { wrongMagnitude = false, rejectOnce = false
     const [integer, fraction = ''] = text.split('.');
     const scaled = BigInt(integer + fraction.padEnd(precision, '0'));
     const number = Number(value);
+
     for (const [id, q] of Object.entries(questions)) {
       if (q.type === 'boolean') { answers[id] = { type: 'boolean', probability: 0.99 }; continue; }
+
       let chosen;
+
       if (id === 'sign') chosen = String(value).startsWith('-') ? 'negative' : 'positive';
       else if (id.startsWith('d')) {
         const p = Number(id.slice(1)) - 4;
@@ -21,27 +25,38 @@ function modelFor(value, precision, { wrongMagnitude = false, rejectOnce = false
       } else if (id === 'magnitude') {
         const bound = text => {
           if (text.startsWith('10^')) return 10 ** Number(text.slice(3));
+
           return Number(text);
         };
+
         chosen = Object.keys(q.criteria).find(key => {
           const label = q.criteria[key];
+
           if (label === 'Zero') return number === 0;
           const match = label.match(/^(.*?) ≤ absolute answer < (.*)$/);
+
           if (match) return Math.abs(number) >= bound(match[1]) && Math.abs(number) < bound(match[2]);
           const more = label.match(/^Absolute answer is (.*?) or greater$/);
+
           if (more) return Math.abs(number) >= bound(more[1]);
+
           return false;
         });
       } else chosen = Object.keys(q.criteria).find(key => q.criteria[key] === compactNumber(value));
+
       if (id === 'answer' && rejectOnce && calls === 2) chosen = 'none';
       expect(chosen).toBeDefined();
       const probabilities = Object.fromEntries(Object.keys(q.criteria).map(key => [key, Number(key === chosen)]));
+
       if (id === 'magnitude' && wrongMagnitude) {
         probabilities[chosen] = 0.49; probabilities.r1 = 0.51; chosen = 'r1';
       }
+
       if (id === 'answer' && uncertain) { probabilities[chosen] = 0.6; probabilities.none = 0.4; }
+
       answers[id] = { type: 'choice', choice: chosen, probabilities };
     }
+
     return { answers, usage: { inputTokens: 100 }, providerMetadata: { gateway: { cost: '0.00001' } } };
   };
 }
@@ -49,6 +64,7 @@ function modelFor(value, precision, { wrongMagnitude = false, rejectOnce = false
 async function run(value, precision, options) {
   const events = [];
   await solve('200*123', precision, modelFor(value, precision, options), event => events.push(event));
+
   return events;
 }
 

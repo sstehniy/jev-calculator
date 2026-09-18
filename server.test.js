@@ -11,10 +11,12 @@ test('HTTP boundary protects files, rejects cross-site requests, and blocks exha
   const db = openBudget(path);
   db.query('UPDATE budget SET used = 1000000000').run();
   db.close();
+
   const server = Bun.spawn([process.execPath, 'server.js'], {
     env: { ...process.env, AI_GATEWAY_API_KEY: 'test-no-real-key', BUDGET_DB: path, PORT: '0', HOST: '127.0.0.1', PUBLIC_ORIGIN: 'https://jev-calculator.vercel.app,https://oracle.tail92806c.ts.net' },
     stdout: 'pipe', stderr: 'pipe',
   });
+
   try {
     const reader = server.stdout.getReader();
     const first = await reader.read();
@@ -28,6 +30,7 @@ test('HTTP boundary protects files, rejects cross-site requests, and blocks exha
     expect(favicon.headers.get('content-type')).toContain('image/svg+xml');
     expect(await favicon.text()).toContain('<svg');
     expect(home.headers.get('content-security-policy')).toContain("frame-ancestors 'none'");
+
     for (const file of ['.env', '.secrets/oracle.env', 'budget.sqlite', 'server.js']) expect((await fetch(url + file)).status).toBe(404);
     const post = options => fetch(url + 'api/calculate', { method: 'POST', ...options });
     expect((await post({ body: '{}' })).status).toBe(415);
