@@ -10,6 +10,7 @@ test('lifetime budget survives restarts, reserves concurrent calls, and fails cl
   let db;
   const request = { state: '2*2', questions: {} };
   const result = { providerMetadata: { gateway: { cost: '0.000001' } } };
+
   try {
     expect(() => openBudget(path)).toThrow();
     expect(Bun.spawnSync([process.execPath, 'budget.js', 'init', path]).exitCode).toBe(0);
