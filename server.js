@@ -17,7 +17,7 @@ const files = { '/': ['index.html', 'text/html'], '/app.js': ['app.js', 'text/ja
 
 const headers = {
   'x-content-type-options': 'nosniff', 'cache-control': 'no-store',
-  'content-security-policy': "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+  'content-security-policy': "default-src 'self'; script-src 'self' https://vercel.live; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
   'referrer-policy': 'no-referrer', 'permissions-policy': 'camera=(), microphone=(), geolocation=()',
   'strict-transport-security': 'max-age=31536000',
 };
