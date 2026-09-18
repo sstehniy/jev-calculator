@@ -22,6 +22,11 @@ test('HTTP boundary protects files, rejects cross-site requests, and blocks exha
     reader.releaseLock();
     const home = await fetch(url);
     expect(home.status).toBe(200);
+    expect(await home.text()).toContain('href="/favicon.svg"');
+    const favicon = await fetch(url + 'favicon.svg');
+    expect(favicon.status).toBe(200);
+    expect(favicon.headers.get('content-type')).toContain('image/svg+xml');
+    expect(await favicon.text()).toContain('<svg');
     expect(home.headers.get('content-security-policy')).toContain("frame-ancestors 'none'");
     for (const file of ['.env', '.secrets/oracle.env', 'budget.sqlite', 'server.js']) expect((await fetch(url + file)).status).toBe(404);
     const post = options => fetch(url + 'api/calculate', { method: 'POST', ...options });

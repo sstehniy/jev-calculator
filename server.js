@@ -8,7 +8,7 @@ const gateway = createGateway({ apiKey: process.env.AI_GATEWAY_API_KEY });
 const budget = openBudget(process.env.BUDGET_DB || './data/budget.sqlite');
 let active = 0;
 let starts = [];
-const files = { '/': ['index.html', 'text/html'], '/app.js': ['app.js', 'text/javascript'], '/style.css': ['style.css', 'text/css'] };
+const files = { '/': ['index.html', 'text/html'], '/app.js': ['app.js', 'text/javascript'], '/style.css': ['style.css', 'text/css'], '/favicon.svg': ['favicon.svg', 'image/svg+xml'] };
 const headers = {
   'x-content-type-options': 'nosniff', 'cache-control': 'no-store',
   'content-security-policy': "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",

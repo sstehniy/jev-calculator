@@ -2,7 +2,7 @@ FROM oven/bun:1.4.2-slim@sha256:cb3bbbb08e13a4a2ff400f24c7a2a1d5efa83f6ef8544d52
 WORKDIR /app
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile --production
-COPY server.js solver.js numbers.js result-check.js budget.js app.js index.html style.css ./
+COPY server.js solver.js numbers.js result-check.js budget.js app.js index.html style.css favicon.svg ./
 RUN bun build result-check.js --target=bun --minify --outfile=/tmp/result-check.js && mv /tmp/result-check.js ./result-check.js
 USER 10000:10000
 ENV HOST=0.0.0.0 BUDGET_DB=/data/budget.sqlite
