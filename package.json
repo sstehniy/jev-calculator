@@ -4,11 +4,19 @@
   "type": "module",
   "scripts": {
     "start": "bun server.js",
-    "test": "bun test"
+    "test": "bun test",
+    "lint": "oxlint",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check ."
   },
   "dependencies": {
     "@ai-sdk/gateway": "4.0.85",
     "ai": "7.0.105",
     "mathjs": "^15.2.0"
+  },
+  "devDependencies": {
+    "@oxlint/plugins": "1.83.0",
+    "oxfmt": "0.68.0",
+    "oxlint": "1.83.0"
   }
 }
