@@ -24,7 +24,12 @@ test('HTTP boundary protects files, rejects cross-site requests, and blocks exha
     reader.releaseLock();
     const home = await fetch(url);
     expect(home.status).toBe(200);
-    expect(await home.text()).toContain('href="/favicon.svg"');
+    const html = await home.text();
+    expect(html).toContain('href="/favicon.svg"');
+    expect(html).not.toContain('vercel.live');
+    expect(html).toContain('<script defer src="/_vercel/insights/script.js"></script>');
+    expect((await fetch(url + '_vercel/insights/view')).status).toBe(404);
+    expect((await fetch(url + '_vercel/insights/unknown')).status).toBe(404);
     const favicon = await fetch(url + 'favicon.svg');
     expect(favicon.status).toBe(200);
     expect(favicon.headers.get('content-type')).toContain('image/svg+xml');
