@@ -18,6 +18,18 @@ bun start
 
 Open http://127.0.0.1:3217. Run `bun test` for the narrowing and accounting checks.
 
+## Code quality
+
+```sh
+bun run lint          # Oxlint with vendored anti-slop rules
+bun run format:check  # Check formatting without changing files
+bun run format        # Apply Oxfmt formatting
+```
+
+Oxlint and `@oxlint/plugins` are pinned to the same version and should be upgraded together. Oxfmt uses two-space indentation, single quotes, semicolons, and a 100-column target. Both tools exclude installed agent skills and the vendored plugin; Oxfmt also leaves benchmark results and generated lockfiles untouched. Plugin provenance is recorded in `tools/oxlint/anti-slop/UPSTREAM.md`.
+
+These checks currently report pre-existing source issues; installing the tooling does not perform a bulk cleanup or add failing deployment gates. This JavaScript project has no separate typecheck configured.
+
 ## How it works
 
 Jev chooses the magnitude, sign, and each decimal digit in one parallel request. Code combines the probability distributions into likely candidate numbers without evaluating the expression. Jev then chooses among up to 48 candidates. Rejected candidates trigger a wider set; uncertain answers get a focused recheck. Small answers normally take two gateway calls. Larger magnitudes expand automatically, with extra digits read in batches. Each call appears as one expandable step containing all its questions.
