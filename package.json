@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ai-sdk/gateway": "4.0.85",
+    "@vercel/analytics": "^2.0.1",
     "ai": "7.0.105",
     "mathjs": "^15.2.0"
   },
