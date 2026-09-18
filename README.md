@@ -74,6 +74,15 @@ The server environment contains `API_DOMAIN`, `AI_GATEWAY_API_KEY`, `GHCR_USER`,
 sudo /srv/jev-calculator/deploy.sh
 ```
 
-The publish workflow builds every push to `main`. After it succeeds, `/srv/jev-calculator/deploy.sh` pulls the image and recreates the stack. Preserve `.env` and `/var/lib/jev-calculator`; the budget ledger is never part of an image or repository.
+The publish workflow builds every push to `main`, then connects over Tailscale as `deploy` and invokes the restricted `jev-calculator` command. Manual runs are allowed to publish/deploy only from `main`. Build and deploy runs are serialized without cancelling an active rollout. Deployment has no repository or package write permissions, uses a pinned SSH host key, and deletes its temporary SSH key on exit.
+
+Configure these Actions secrets in this repository before enabling automatic deployment:
+
+- `TS_OAUTH_CLIENT_ID` and `TS_OAUTH_SECRET`: Tailscale OAuth credentials permitted to join as `tag:ci`; the tailnet ACL must permit access to `100.89.181.64:22`.
+- `DEPLOY_SSH_KEY`: the restricted deploy user's private key, not an administrator SSH key.
+
+The server's root-owned `/srv/jev-calculator/deploy.sh` pulls the image and recreates only the `jev-calculator` Compose project. It polls `APP_HEALTH_URL` and reports failure if the service does not become healthy. No CI step edits server secrets, resets the ledger, or restarts the shared Caddy, Receit, or PostgreSQL services. Preserve `.env` and `/var/lib/jev-calculator`; the budget ledger is never part of an image or repository.
+
+The existing server deploy runner follows `main` (both the manifest and image), not an immutable commit, and does not automatically roll back failed deployments. A failed health check requires operator investigation. Avoid simultaneous manual deployments. If the server SSH host key changes, verify its replacement through a trusted administrative connection before updating the workflow's pinned key; do not disable host verification.
 
 Sources: https://vercel.com/docs/ai-gateway/modalities/evaluation and https://vercel.com/ai-gateway/models/jev
