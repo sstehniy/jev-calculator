@@ -11,6 +11,7 @@ const format = value => {
 };
 $('info').onclick = () => $('about').showModal();
 $('close-about').onclick = () => $('about').close();
+const shake = id => { const el = $(id); el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); };
 document.querySelectorAll('[data-precision]').forEach(button => button.onclick = () => {
   precision = Number(button.dataset.precision);
   $('result-check').hidden = true;
@@ -46,6 +47,7 @@ function showCheck(check) {
   const tags = { correct: '✓ Correct', wrong: '✕ Miss', unanswered: '• No guess', undefined: '• Undefined', unavailable: '• No check' };
   $('result-check').hidden = false;
   $('result-check').dataset.status = check.status;
+  if (check.status === 'wrong') shake('result-check');
   $('check-tag').textContent = tags[check.status];
   $('real-answer').textContent = 'Unavailable';
   if (check.actual !== null) {
@@ -88,7 +90,7 @@ function receive(event) {
   if (event.type === 'error') fail(event.message);
   if (event.check) showCheck(event.check);
 }
-function fail(message) { $('status').textContent = 'You stumped Jev'; $('live-label').textContent = 'Stumped'; $('answer').textContent = '?'; $('note').textContent = message; $('note').classList.add('error'); }
+function fail(message) { $('status').textContent = 'You stumped Jev'; $('live-label').textContent = 'Stumped'; $('answer').textContent = '?'; const note = $('note'); note.textContent = message; note.classList.remove('error', 'shake'); void note.offsetWidth; note.classList.add('error', 'shake'); }
 async function calculate() {
   if (running || !expression.value.trim()) return;
   $('result-check').hidden = true;
