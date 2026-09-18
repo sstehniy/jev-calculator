@@ -4,7 +4,13 @@ An iOS 6-inspired calculator experiment using `typesafe-ai/jev` through Vercel A
 
 Live: **https://jev.132-145-253-62.sslip.io**. The free hostname resolves directly to Oracle, where Caddy provides HTTPS and proxies to the private Docker network. **https://jev-calculator.vercel.app** remains a short alias and forwards to the same Oracle endpoint; no API key or application code runs on Vercel.
 
-The Vercel rule is named `Oracle calculator`, matches `^/(.*)$`, and rewrites to the `sslip.io` address. Inspect it with `vercel routes list --project jev-calculator --scope sstehniys-projects`.
+The Vercel rule is named `Oracle calculator`, matches `^/((?!_vercel/insights(?:/|$)).*)$`, and rewrites to the `sslip.io` address. Inspect it with `vercel routes list --project jev-calculator --scope sstehniys-projects`.
+
+## Analytics
+
+Vercel Web Analytics is enabled on the `jev-calculator` project. The page loads `/_vercel/insights/script.js` with `defer`. Vercel handles analytics paths directly; its Oracle rewrite must exclude `/_vercel/insights/`. For visitors using the Oracle hostname, Bun proxies only the analytics script and page-view endpoint to `https://jev-calculator.vercel.app`, preserving the browser user agent and proxy-provided client IP. Keeping requests on the same origin avoids cross-origin collection failures. No analytics package or browser build is needed for this plain HTML setup.
+
+After first enabling Analytics, redeploy the Vercel project to activate its endpoints. See the [Vercel Analytics quickstart](https://vercel.com/docs/analytics/quickstart).
 
 ## Run
 

@@ -17,7 +17,7 @@ const files = { '/': ['index.html', 'text/html'], '/app.js': ['app.js', 'text/ja
 
 const headers = {
   'x-content-type-options': 'nosniff', 'cache-control': 'no-store',
-  'content-security-policy': "default-src 'self'; script-src 'self' https://vercel.live; style-src 'self'; connect-src 'self' https://vercel.live; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+  'content-security-policy': "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
   'referrer-policy': 'no-referrer', 'permissions-policy': 'camera=(), microphone=(), geolocation=()',
   'strict-transport-security': 'max-age=31536000',
 };
@@ -46,6 +46,24 @@ const server = Bun.serve({
   error() { return errorResponse('Request could not be completed.', 500); },
   async fetch(req) {
     const url = new URL(req.url);
+
+    if ((url.pathname === '/_vercel/insights/script.js' && req.method === 'GET') ||
+        (url.pathname === '/_vercel/insights/view' && req.method === 'POST')) {
+      const analyticsHeaders = new Headers();
+
+      for (const name of ['content-type', 'user-agent', 'x-forwarded-for']) {
+        if (req.headers.has(name)) analyticsHeaders.set(name, req.headers.get(name));
+      }
+      const response = await fetch(`https://jev-calculator.vercel.app${url.pathname}`, {
+        method: req.method, headers: analyticsHeaders,
+        body: req.method === 'POST' ? await req.arrayBuffer() : undefined,
+        signal: AbortSignal.any([req.signal, AbortSignal.timeout(10000)]),
+      });
+
+      return new Response(response.body, { status: response.status, headers: {
+        ...headers, 'content-type': response.headers.get('content-type') || 'text/plain',
+      } });
+    }
 
     if (['GET', 'HEAD'].includes(req.method) && files[url.pathname]) {
       const [file, type] = files[url.pathname];
